@@ -49,6 +49,7 @@ def teamhome_redirect(r):
 def teamlist(request):
     teams = []
     for t in tlist:
+        
         teams.append({
             'id':len(teams),
             'name':t.name,
