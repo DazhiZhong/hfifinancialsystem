@@ -1,0 +1,133 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags%}
+{% block content %}
+
+
+
+{% load getattr %}
+
+<div class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title">{{team.name}}</h4>
+    <h5>{{team.countryname| getattr:team.country}}</h5>
+  </div>
+</div>
+
+<div id = 'money' class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title">货币存款</h4>
+    <p class = 'lead'>大洋邦货币: {{ team.money.a}}</p>
+    <p class = 'lead'>欧亚国货币: {{ team.money.b}}</p>
+    <p class = 'lead'>东亚国货币: {{ team.money.c}}</p>
+  </div>
+</div>
+
+
+<div id = 'storage' class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title">Storage</h4>
+    {% for key,value in team.storage.items%}
+    <p class = 'lead'>{{ team.namedict | getattr:key }}   :   {{value}}</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div id = 'factory' class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title">加工厂</h4>
+    {% for keys,fts in team.fact.items %}
+        
+        <h2>{{ team.factorynamedict | getattr:keys }}  等级：{{ team.factorynamedict | getattr:fts.level }} </h2>
+        <h4>生产材料</h4>
+        {% for key,value in fts.intake.items %}
+        <p class='lead'>{{ team.namedict | getattr:key }} : {{value}}</p>
+        {% endfor %}
+        <h4>输出</h4>
+        {% for key,value in fts.output.items %}
+        <p class='lead'>{{ team.namedict | getattr:key }} : {{value}}</p>
+        {% endfor %}
+        <div class="content-section">
+            <form action="#factory" method='GET'>
+            <button  class = "btn btn-primary" name="{{keys}}" type='submit'>UPGRADE</button>
+    </form>
+  </div>
+    {% endfor %}
+  </div>
+</div>
+
+    <div id = 'buy' class="card" style="width: 50vw;     margin:3% ">
+    <div class="card-body">
+        <h4 class="card-title"> 收购 </h4>
+        <div class="content-section">
+        <form action = "#buy" method='POST'>
+            {% csrf_token %}
+            {{buyform | crispy}}
+            <button  class = "btn btn-primary" type='submit'>submit</button>
+        </form>
+        {% for item in team.items %}
+            <p class="card-text ">货物类型：   
+            <strong class = 'h1'>
+                {{item.name}}
+            </strong>  
+            <small class = 'text-muted' >
+                货物数量：
+            </small>   
+            <strong class = 'h1'>
+                {{item.qty}}
+            </strong>    
+            单个货物价格：  
+            <strong class = 'h1'>
+                {{item.price_each}}   
+            </strong>
+            
+            货币类型：  
+            <strong class = 'h1'>
+                {{item.origin}}
+            </strong>
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<div id = 'trade' class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title"> 交易 </h4>
+    <small class='mute'> 本家为买方，对方为交易方 </small>
+
+    <div class="content-section">
+    <form action = "#trade" method='POST'>
+        {% csrf_token %}
+        {{tradeform | crispy}}
+        <button  class = "btn btn-primary" type='submit'>submit</button>
+    </form>
+</div>
+</div>
+</div>
+
+<div id = 'exchange' class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h4 class="card-title"> 换汇 </h4>
+    <div class="content-section">
+    <form action = "#exchange" method='POST'>
+        {% csrf_token %}
+        {{exchangeform | crispy}}
+        <button  class = "btn btn-primary" type='submit'>submit</button>
+    </form>
+</div>
+
+<script>
+  $(document).ready(setTimeout(function(){
+    $('#navhome').parent().toggleClass("active");
+  },300))
+</script>
+
+{% endblock content %}

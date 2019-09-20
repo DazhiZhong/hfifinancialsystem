@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+{%block content%}
+
+{% for team in teams %}
+<div class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h5 class="card-title">{{team.name}}</h5>
+    <p class="card-text lead">{{team.country | safe}}</p>
+    <a href="{% url 'teamhome_redirect'%}{{ team.id }}" class="btn btn-secondary">GO!</a>
+  </div>
+</div>
+
+{% endfor %}
+
+<script>
+  $(document).ready(setTimeout(function(){
+    $('#navhome').parent().toggleClass("active");
+
+
+  },300))
+</script>
+
+{%endblock content%}

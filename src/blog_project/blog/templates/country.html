@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+{%block content%}
+{% for c in country %}
+<div class="card" style="width: 50vw;    margin:3%  ">
+  <div class="card-body">
+    <h4 class="card-title">{{c.name}}</h4>
+      <p class='lead'> {{c.bank}}</p>
+  </div>
+</div>
+{% endfor %}
+{%endblock content%}

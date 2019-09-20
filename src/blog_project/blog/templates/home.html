@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+{%block content%}
+<a style="width: 50vw;     margin:3% " class="btn btn-primary" href="/new/" role="button">New</a>
+
+{% for ct in cts %}
+<div class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h5 class="card-title">{{ct.title}}</h5>
+    
+    <h6 class="card-subtitle mb-2 text-muted">{{ct.authors}}</h6>
+    <p class="card-text lead">{{ct.content | safe}}</p>
+    <a href="#" class="btn btn-secondary">{{ct.date_posted | date:"D"}}</a>
+  </div>
+</div>
+
+{% endfor %}
+
+<script>
+  $(document).ready(function(){
+    $('#navhome').parent().toggleClass("active");
+  })
+</script>
+{%endblock content%}

@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    
+    
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'blogstyle.css' %}">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+
+
+
+    {% if title %}
+        <title>{{title}}</title>
+    {%  else %}
+        <title>Document</title>
+    {% endif %}
+    
+</head>
+<body>
+
+    <!--nav bar-->
+    <nav class=" navbar  navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'teamlist'%}" id = 'menu-toggle'>9.21HFI校内商赛系统</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav " id = 'blognav'>
+        <li class="nav-item">
+            <a class="nav-link"  id = 'navhome' href="{% url 'teamlist'%}">小组列表 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  id = 'navbid' href="{% url 'bidding'%}">收购<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  id = 'navnotice' href="{% url 'blog_home'%}">通知<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  id = 'navpickle' href="{% url 'pickle'%}">存档<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"   id = 'navadmin' href="/admin">Admin Page<span class="sr-only">(current)</span></a>
+        </li>
+
+        {% if  user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout'%}">登出</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login'%}">Login</a>
+        </li>
+       
+        {% endif %}
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'user-reg'%}">Register</a>
+            </div>
+ 
+            
+
+        </li>
+       
+        </ul>
+    </div>
+    
+    </nav>
+    <!--end nav bar-->
+
+    <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    
+    <div class="bg-light border-right " id="sidebar-wrapper">
+    <div class='make-me-sticky'>
+      <a href = "#" class="bg-light"><div class="sidebar-heading">Quick Navagation</div></a>
+      <div class="list-group list-group-flush">
+        <a href="#money" class="list-group-item list-group-item-action bg-light">Money</a>
+        <a href="#storage" class="list-group-item list-group-item-action bg-light">Storage</a>
+        <a href="#factory" class="list-group-item list-group-item-action bg-light">Factory</a>
+        <a href="#buy" class="list-group-item list-group-item-action bg-light">Buy</a>
+        <a href="#trade" class="list-group-item list-group-item-action bg-light">Trade</a>
+        <a href="#exchange" class="list-group-item list-group-item-action bg-light">Exchange</a>
+      </div>
+    </div>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+
+
+    
+
+    <div class="container">
+        
+        {% if messages %}
+        {% for message in messages%}
+        <div class="alert-fixed alert alert-{{ message.tags}}" >
+        {{message}}
+  
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </div>
+
+
+        {% endfor%}
+        {% endif %}
+
+
+
+        {% block content %}{% endblock %}
+    </div>
+    </div>
+
+
+
+
+</body>
+</html>

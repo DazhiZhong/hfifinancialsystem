@@ -1,0 +1,47 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags%}
+{%block content%}
+<a style="width: 50vw;     margin:3% " class="btn btn-primary" href="/new/" role="button">New</a>
+
+{% for group in groups %}
+<div class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h5 class="card-title">{{group.name}}</h5>
+    
+    <div class="content-section">
+      <form method='POST'>
+          {% csrf_token %}
+          {{form }}
+          <button type='submit'>submit</button>
+      </form>
+    </div>
+    {% for item in group.items %}
+    <p>assss</p>
+    <p class="card-text ">Name:   
+      <strong class = 'h1'>
+        {{item.name}}
+      </strong>  
+      <small class = 'text-muted' >
+        Quantity:
+      </small>   
+      <strong class = 'h1'>
+        {{item.qty}}
+      </strong>    
+      Price Each:  
+      <strong class = 'h1'>
+        {{item.price_each}}   
+      </strong>
+      </p>
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endfor %}
+
+<script>
+  $(document).ready(function(){
+    $('#navhome').parent().toggleClass("active");
+  })
+</script>
+{%endblock content%}

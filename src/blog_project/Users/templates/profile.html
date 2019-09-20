@@ -1,0 +1,9 @@
+{% extends "base.html"%}
+
+{%block content%}
+<h2>{{ user.username }}</h2>
+<div>
+<img class = 'rounded-circle account-img' height = 150 width = 150 src = {{ user.profile.image.url }}>
+</div>
+<p>{{ user.email }}<p>
+{%endblock content%}

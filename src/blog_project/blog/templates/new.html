@@ -1,0 +1,14 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags%}
+{%block content%}
+
+<script src="https://cdn.tiny.cloud/1/3ok48pymmedz63grx4izdcz2ykh5v624jcsga1co4r35dxzw/tinymce/5/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>
+<div class="content-section">
+    <form method='POST'>
+        {% csrf_token %}
+        {{form | crispy}}
+        <button type='submit'>submit</button>
+    </form>
+</div>
+{%endblock content%}    

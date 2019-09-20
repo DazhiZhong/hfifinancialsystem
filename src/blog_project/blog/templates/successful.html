@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{%block content%}
+
+<div class="card" style="width: 50vw;    margin:3%  ">
+  <div class="card-body">
+    <h4 class="card-title">{{text.bigtitle}}</h4>
+      <p class='lead'> {{text.text}}</p>
+        <a name="buyallthings" href="{% url text.redir %}" class="btn btn-secondary">{{text.button}}</a>
+  </div>
+</div>
+
+<script>
+  $(document).ready(setTimeout(function(){
+    $("#{{ text.nav }}").parent().toggleClass("active");
+
+  },30))
+</script>
+{%endblock content%}
