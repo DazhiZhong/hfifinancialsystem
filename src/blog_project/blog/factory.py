@@ -14,6 +14,7 @@ Factorylist = [
     
 ]
 #1 a 2b 3c
+'''
 FDICT = {
     1:{
         'f1':{
@@ -472,3 +473,23 @@ FDICT = {
         },
     },
 }
+'''
+FDICT = {}
+def loadjson():
+    global FDICT
+    import json
+    from .models import Post
+    p = Post.objects.filter(title='factoryjson')
+    p = p[0].content
+    print('=================')
+    FDCT = json.loads(p)
+    print(FDCT)
+    for key,d in FDCT.items():
+        print(type(key),key)
+        FDICT[int(key)] = d
+def loadjsonwrapper():
+    global FDICT
+    loadjson()
+loadjsonwrapper()
+#app_json = json.dumps(FDICT,indent=4)
+#print(app_json)

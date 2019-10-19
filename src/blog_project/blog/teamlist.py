@@ -19,12 +19,12 @@ class Team():
         'c3':'燃烧机器人',
     }
     countryname = {
-        'a':'大洋邦',
-        'b':'欧亚国',
-        'c':'东亚国',
-        1:'大洋邦',
-        2:'欧亚国',
-        3:'东亚国'
+        'a':'大洋邦3',
+        'b':'欧亚国3',
+        'c':'东亚国3',
+        1:'大洋邦2',
+        2:'欧亚国2',
+        3:'东亚国2'
     }
     factorynamedict = {
         'Factory 1':'一号加工厂',
@@ -62,18 +62,43 @@ class Team():
         ]
 
         # storage 仓库， 一共有多少物品
-        self.storage = {
-            'a1':1000,
-            'a2':1000,
-            'a3':1000,
-            'b1':1000,
-            'b2':1000,
-            'b3':1000,
-            'c1':1000,
-            'c2':1000,
-            'c3':1000,
-        }
-
+        if self.country == 1:
+            self.storage = {
+                'a1':50,
+                'a2':50,
+                'a3':50,
+                'b1':0,
+                'b2':0,
+                'b3':0,
+                'c1':0,
+                'c2':0,
+                'c3':0,
+            }
+        elif self.country == 2:
+            self.storage = {
+                'a1':0,
+                'a2':0,
+                'a3':0,
+                'b1':50,
+                'b2':50,
+                'b3':50,
+                'c1':0,
+                'c2':0,
+                'c3':0,
+            }
+        elif self.country == 3:
+            self.storage = {
+                'a1':0,
+                'a2':0,
+                'a3':0,
+                'b1':0,
+                'b2':0,
+                'b3':0,
+                'c1':50,
+                'c2':50,
+                'c3':50,
+            }
+       
         # 工厂
         self.factories = [
             ['f1','up0'],
@@ -83,11 +108,25 @@ class Team():
         self.fact = {}
         
         # 三国货币
-        self.money = {
-            'a':1000,
-            'b':1000,
-            'c':1000
-        }  
+        
+        if self.country == 1:
+            self.money = {
+                'a':500,
+                'b':0,
+                'c':0
+            }          
+        elif self.country == 2:
+            self.money = {
+                'a':0,
+                'b':500,
+                'c':0
+            }  
+        elif self.country == 3:
+            self.money = {
+                'a':0,
+                'b':0,
+                'c':500
+            }  
         
         self.parsefact()
     def parsefact(self):
@@ -140,8 +179,8 @@ class Team():
         factory => ('f1','up0')
         '''
         upprice = {
-            0:1000,
-            1:1000
+            0:1001,
+            1:1001
         }
         countrynumtostr = {
             1:'a',
@@ -159,6 +198,7 @@ class Team():
             self.parsefact()
     def update(self):
         import time
+        self.parsefact()
         t = time.gmtime()
         nowtime = time.strftime('%M',t)
         print('tryupdate')
@@ -325,6 +365,17 @@ Teamlist = [
     ('Team1',1),
     ('Team2',3),
     ('Team3',2),
+    ('Team4',1),
+    ('Team5',3),
+    ('Team6',2),
+    ('Team7',1),
+    ('Team8',3),
+    ('Team9',2),
+    ('Team10',1),
+    ('Team11',3),
+    ('Team12',2),
+    ('Team13',1),
+    ('Team14',3),
 ]
 
 tlist = []

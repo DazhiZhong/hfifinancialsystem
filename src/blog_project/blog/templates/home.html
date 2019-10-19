@@ -8,8 +8,8 @@
     <h5 class="card-title">{{ct.title}}</h5>
     
     <h6 class="card-subtitle mb-2 text-muted">{{ct.authors}}</h6>
-    <p class="card-text lead">{{ct.content | safe}}</p>
-    <a href="#" class="btn btn-secondary">{{ct.date_posted | date:"D"}}</a>
+    <p class="card-text lead">{{ct.content | safe }}</p>
+    <a href="/post/{{ct.id}}" class="btn btn-secondary">{{ct.date_posted | date:"D"}}---{{ct.id}}</a>
   </div>
 </div>
 

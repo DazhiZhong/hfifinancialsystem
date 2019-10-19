@@ -17,5 +17,7 @@ urlpatterns = [
     path('pickle/',views.pickle_my_class,name='pickle'),    
     path('pickle_payload/',views.pickle_payload,name='picklepayload'),
     path('deletepickle',views.delete_pickle,name='deletepickle'),
-    path('country/',views.countryv,name='country')
+    path('country/',views.countryv,name='country'),
+    path('post/<int:pk>',views.individual,name='blog_indie')
 ]
+

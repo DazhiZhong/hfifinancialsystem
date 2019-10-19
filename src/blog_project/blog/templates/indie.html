@@ -1,0 +1,15 @@
+{% extends "base.html"%}
+{%block content%}
+
+<div class="card" style="width: 50vw;     margin:3% ">
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    
+    <h6 class="card-subtitle mb-2 text-muted">{{post.authors}}</h6>
+    <p class="card-text lead">{{post.content | safe}}</p>
+    <a href="{% url 'blog_home' %}" class="btn btn-secondary">{{post.date_posted | date:"D"}}---{{post.id}}</a>
+  </div>
+</div>
+
+
+{%endblock content%}
